@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
+from django.views import View
+
 
 def export_table(request, app_name, model_name, fields=None):
     # table = request.GET.get('search')
@@ -18,11 +20,14 @@ def redirect_to_export_table(request, *args, **kwargs):
     
     return redirect('hotel:export_table', app_name=app_name, model_name=model_name)
 
-def your_view(request):
-    # Get all models in the app
-    models = apps.get_models()
+class IndexView(View):
+    template_name = 'index.html'
 
-    # Extract model names
-    model_names = [model.__name__ for model in models]
+    def get(self, request):
+        models = apps.get_models()
+        model_names = [model.__name__ for model in models][:-6]
+        content = {
+            'options': model_names,
+        }
+        return render(request, self.template_name, content)
 
-    return render(request, 'index.html', {'options': model_names})
