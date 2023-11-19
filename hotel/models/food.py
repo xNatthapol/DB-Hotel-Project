@@ -36,4 +36,4 @@ class Ingredient(models.Model):
 class MealList(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     quantity_ordered = models.IntegerField()
-
+    date = models.DateField()
