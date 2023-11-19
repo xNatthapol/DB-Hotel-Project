@@ -140,6 +140,17 @@
         line-height: 11px;
     }
 
+    .nav-text {
+        font-family: Riesling;
+        font-size: 22px;
+        font-weight: 50;
+        color: #F5F5DC;
+        word-wrap: break-word;
+        margin-left: 23px;
+        text-decoration: none;
+    }
+
+
 </style>
 
 
@@ -148,18 +159,43 @@
 
     <ul class="nav-right">
         <li>
-            <form action="{% url 'hotel:index' %}" method="post">
-                {% csrf_token %}
-                <td>
-                    <select class="search-select" id="search" name="search">
+        <form action="{% url 'hotel:index' %}" method="post">
+            {% csrf_token %}
+            <td>
+               <label class="nav-text" for="search">Search:</label>
+                <select class="search-select" id="search" name="search">
                     {% for option in options %}
-                        <option value="{{ option }}">{{ option }}</option>
+                        <option value="{{ option }}" {% if option == search %}selected{% endif %}>{{ option }}</option>
                     {% endfor %}
-                    </select>
-                </td>
+                </select>
+               <label class="nav-text" for="order_by">Sort_Column:</label>
+                <select class="search-select" id="order_by" name="order_by">
+                    {% for field in fields %}
+                        <option value="{{ field }}" {% if field == order_by %}selected{% endif %}>{{ field }}</option>
+                    {% endfor %}
+                </select>
+               <label class="nav-text" for="selected">Order:</label>
+                <select class="search-select" id="selected" name="selected">
+                    <option value="LOW->HIGH" {% if 'LOW->HIGH' == selected %}selected{% endif %}>LOW->HIGH</option>
+                    <option value="HIGH->LOW" {% if 'HIGH->LOW' == selected %}selected{% endif %}>HIGH->LOW</option>
+                </select>
+            </td>
             <td><input class="submit-btn" type="submit" value="Export"></td>
-            </form>
+        </form>
         </li>
+{#    <li>#}
+{#        <form action="{% url 'hotel:index' %}" method="post">#}
+{#            {% csrf_token %}#}
+{#            <td>#}
+{#                <select class="search-select" id="order_by" name="order_by">#}
+{#                {% for type in fields %}#}
+{#                    <option value="{{ type }}">{{ type }}</option>#}
+{#                {% endfor %}#}
+{#                </select>#}
+{#            </td>#}
+{#        </form>#}
+{#    </li>#}
+
     </ul>
 </nav>
 <div class="search-div">
