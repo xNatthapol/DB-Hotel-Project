@@ -1,0 +1,54 @@
+[
+{
+  "model": "hotel.role",
+  "pk": 1,
+  "fields": {
+    "role_name": "Manager",
+    "base_salary": "20000.00"
+  }
+},
+{
+  "model": "hotel.role",
+  "pk": 2,
+  "fields": {
+    "role_name": "Developer",
+    "base_salary": "50000.00"
+  }
+},
+{
+  "model": "hotel.employee",
+  "pk": 1,
+  "fields": {
+    "role": 1,
+    "first_name": "Jona",
+    "last_name": "Nono",
+    "phone_number": "022222222",
+    "email": "hi@email.com",
+    "hire_date": "2023-11-19"
+  }
+},
+{
+  "model": "hotel.employee",
+  "pk": 2,
+  "fields": {
+    "role": 2,
+    "first_name": "James",
+    "last_name": null,
+    "phone_number": "8123123",
+    "email": "jonan@email.com",
+    "hire_date": "2023-11-19"
+  }
+},
+{
+  "model": "hotel.employee",
+  "pk": 3,
+  "fields": {
+    "role": 2,
+    "first_name": "Homo",
+    "last_name": "Mona",
+    "phone_number": "037423423",
+    "email": "nono@example.com",
+    "hire_date": "2023-11-19"
+  }
+}
+]

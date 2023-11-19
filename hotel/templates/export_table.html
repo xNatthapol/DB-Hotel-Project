@@ -15,8 +15,8 @@
         <tbody>
             {% for row in data %}
                 <tr>
-                    {% for field in fields %}
-                        <td>{{ row.field }}</td>
+                    {% for field, value in row.items %}
+                        <td>{{ value }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
