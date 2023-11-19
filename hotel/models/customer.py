@@ -8,3 +8,6 @@ class Customer(models.Model):
     email = models.EmailField(max_length=100)
     checkin_time = models.DateTimeField()
     checkout_time = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

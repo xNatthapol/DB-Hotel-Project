@@ -8,9 +8,15 @@ class ReservedRoom(models.Model):
     checkin_time = models.DateTimeField()
     checkout_time = models.DateTimeField()
 
+    def __str__(self):
+        return f"{self.customer} - {self.room}"
+
 
 class ReservedFacility(models.Model):
     customer = models.ForeignKey('hotel.Customer', on_delete=models.CASCADE)
     facility = models.ForeignKey('hotel.Facility', on_delete=models.CASCADE)
     checkin_time = models.DateTimeField()
     checkout_time = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.customer} - {self.facility}"
