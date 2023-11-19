@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import Customer, Payment, Account, Facility, Room, ReservedRoom, ReservedFacility, Stock, Ingredient, MealList, Recipe, Employee, Role
+from .models import Customer, Payment, Facility, Room, ReservedRoom, ReservedFacility, Stock, Ingredient, MealList, Recipe, Employee, Role
 
 # Register all models with the admin site
 admin.site.register(Customer)
 admin.site.register(Payment)
-admin.site.register(Account)
 admin.site.register(Facility)
 admin.site.register(Room)
 admin.site.register(ReservedRoom)

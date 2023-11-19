@@ -1,23 +1,18 @@
-{#{% extends 'navbar.html' %}#}
+{% extends 'base.html' %}
 
+{% block content %}
+<style>
+    body {
+        padding-top: 110px;
+    }
+</style>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Export Table</title>
 </head>
 <body>
-        <li>
-            <form action="{% url 'hotel:index' %}" method="post">
-                {% csrf_token %}
-                <td>
-                    <select id="search" name="search">
-                    {% for option in options %}
-                        <option value="{{ option }}">{{ option }}</option>
-                    {% endfor %}
-                    </select>
-                </td>
-            <td><input type="submit" value="Export"></td>
-            </form>
-        </li>
+    <h1>Hotel Test Tag</h1>
 </body>
 </html>
+{% endblock %}
