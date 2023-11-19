@@ -13,17 +13,23 @@ def export_table(request, app_name, model_name, fields=None):
     data = model.objects.values(*fields)  # Retrieve only the specified fields
     return render(request, 'export_table.html', {'data': data, 'fields': fields})
 
+# class TableExportView(View):
+#     template_name = 'export_table.html'
+#
+#     def get(self, request, app_name, model_name, fields=None):
+#         return export_table(request, app_name, model_name, fields)
+#
+#     def post(self, request, app_name, model_name, fields=None):
+#         return export_table(request, app_name, model_name, fields)
 
-def redirect_to_export_table(request, *args, **kwargs):
-    app_name = kwargs.get('app_name', 'hotel')
-    model_name = kwargs.get('model_name', 'Employee')
-    
-    return redirect('hotel:export_table', app_name=app_name, model_name=model_name)
 
 class IndexView(View):
     template_name = 'index.html'
 
     def get(self, request):
+        # selected_model = request.GET.get('search')
+        # if selected_model:
+        #     return redirect('hotel:export_table', app_name='hotel', model_name=selected_model)
         models = apps.get_models()
         model_names = [model.__name__ for model in models][:-6]
         content = {
@@ -31,3 +37,6 @@ class IndexView(View):
         }
         return render(request, self.template_name, content)
 
+    def post(self, request):
+        selected_model = request.POST.get('search')
+        return redirect('hotel:export_table', app_name="hotel", model_name=selected_model)

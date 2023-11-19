@@ -1,4 +1,4 @@
-{% extends 'navbar.html' %}
+{#{% extends 'navbar.html' %}#}
 
 <!DOCTYPE html>
 <html>
@@ -6,23 +6,18 @@
     <title>Export Table</title>
 </head>
 <body>
-    <table border="1">
-        <thead>
-            <tr>
-                {% for field in fields %}
-                    <th>{{ field }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
-                <tr>
-                    {% for field, value in row.items %}
-                        <td>{{ value }}</td>
+        <li>
+            <form action="{% url 'hotel:index' %}" method="post">
+                {% csrf_token %}
+                <td>
+                    <select id="search" name="search">
+                    {% for option in options %}
+                        <option value="{{ option }}">{{ option }}</option>
                     {% endfor %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </select>
+                </td>
+            <td><input type="submit" value="Export"></td>
+            </form>
+        </li>
 </body>
 </html>

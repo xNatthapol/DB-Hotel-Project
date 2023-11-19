@@ -5,7 +5,7 @@ from .views import export_table, IndexView
 
 app_name = 'hotel'
 urlpatterns = [
+    path('', IndexView.as_view(), name='index'),
+    # path('export_table/', RedirectView.as_view(url="/hotel/")),
     path('export_table/<str:app_name>/<str:model_name>/', export_table, name='export_table'),
-    path('export_table/<str:app_name>/<str:model_name>/<str:fields>/', export_table, name='export_table_with_fields'),
-    path("", IndexView.as_view(), name='index'),
 ]
