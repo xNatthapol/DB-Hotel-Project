@@ -8,7 +8,7 @@ class Role(models.Model):
 
 
 class Employee(models.Model):
-    role = models.ForeignKeyField(Role, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
