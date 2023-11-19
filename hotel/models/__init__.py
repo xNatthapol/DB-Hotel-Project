@@ -3,4 +3,4 @@ from .financial import Payment, Account
 from .type import Facility, Room
 from .reserved import ReservedRoom, ReservedFacility
 from .food import Stock, Ingredient, MealList, Recipe
-from .worker import Employee, Head_chef, Accountant
+from .worker import Employee, HeadChef, Accountant
