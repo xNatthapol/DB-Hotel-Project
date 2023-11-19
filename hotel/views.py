@@ -7,7 +7,7 @@ def export_table(request, app_name, model_name, fields=None):
     if fields is None:
         fields = [field.name for field in model._meta.get_fields()]
 
-    data = model.objects.all()
+    data = model.objects.values(*fields)  # Retrieve only the specified fields
     return render(request, 'export_table.html', {'data': data, 'fields': fields})
 
 
