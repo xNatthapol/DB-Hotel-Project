@@ -18,6 +18,7 @@ class Room(models.Model):
 
     floor = models.IntegerField(choices=FLOOR_CHOICES)
     room_type = models.CharField(max_length=30, choices=ROOM_TYPE_CHOICES)
+    room_price = models.IntegerField(default=0)
     accommodates = models.IntegerField()
     is_available = models.BooleanField(default=True)
 
