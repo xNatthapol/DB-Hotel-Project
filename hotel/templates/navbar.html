@@ -14,7 +14,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 110px;
+        height: 200px;
         background-color: #fff ;
     }
 
@@ -68,6 +68,7 @@
         color: #000000;
         font-family: Riesling;
         word-wrap: break-word;
+        display: table-row-group;
     }
 
     .nav-text {
@@ -80,6 +81,9 @@
         font-size: 16px;
         margin-left: 15px;
         text-decoration: none;
+        display: grid;
+        grid : 1fr / 1fr 1fr; 
+
     }
 </style>
 
@@ -113,17 +117,19 @@
                 <option value="HIGH->LOW" {% if 'HIGH->LOW' == selected %}selected{% endif %}>HIGH->LOW</option>
             </select>
         </li>
+        <li>
+            <label class="nav-text">SHOW COLUMN</label>
+            {% for field in fields %}
+            <label class="nav-small">{{ field }}:
+                <input class="checkbox" type="checkbox" name="fields" value="{{ field }}" {% if field in selected_fields %}checked{% endif %}>
+            </label>
+            {% endfor %}
+        </li>
         <td><input class="btn btn-outline" type="submit" value="Search"></td>
     </form>
 </nav>
 
 <div class="search-div">
-    <label class="nav-text">SHOW COLUMN</label>
-    {% for field in fields %}
-        <label class="nav-small">{{ field }}:
-            <input class="checkbox" type="checkbox" name="fields" value="{{ field }}" {% if field in selected_fields %}checked{% endif %}>
-        </label>
-    {% endfor %}
     <form method="get" action="{% url 'hotel:index' %}">
         <input class="input input-bordered w-full max-w-xs" type="text" id="search" name="search" placeholder="Search" value="{{ search_cocktail }}">
     </form>
