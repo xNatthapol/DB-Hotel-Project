@@ -45,7 +45,7 @@ def export_table(request, model_name, fields=None, order_by=None):
         else:
             fields = fields.split(',')
 
-    data = model.objects.order_by(order).values(*fields)
+    data = model.objects.order_by(order_by).values(*fields)
 
     content = {
         'options': model_names,
