@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.views import View
 
@@ -54,7 +55,6 @@ def export_table(request, model_name, fields=None, order_by=None):
         'search': search,
         'order_by': order,
         'selected': selected,
-
     }
     return render(request, 'export_table.html', content)
 
@@ -76,6 +76,12 @@ def get_relation_details(model):
             relation_details.append(relation_detail)
 
     return relation_details
+
+def delete_data(model_name, pk):
+    model = apps.get_model(app_label="hotel", model_name=model_name)
+    instance = get_object_or_404(model, pk=pk)
+    instance.delete()
+    return redirect('hotel:export_table', model_name=model_name)
 
 
 class IndexView(View):
@@ -114,3 +120,4 @@ class IndexView(View):
 
 
         return redirect('hotel:export_table', model_name=selected_model, order_by=order_by)
+

@@ -22,7 +22,7 @@
     }
 </style>
 
-<!-- templates/index.html -->
+<!-- templates/export_table.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +37,7 @@
                 {% for field in fields_table %}
                     <th>{{ field }}</th>
                 {% endfor %}
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,12 @@
                     {% for field, value in row.items %}
                         <td>{{ value }}</td>
                     {% endfor %}
+                    <td>
+                        <form action="{% url 'hotel:delete_data' model_name=search pk=row.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
