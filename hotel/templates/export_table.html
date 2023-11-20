@@ -3,6 +3,11 @@
 {% block content %}
 
 <style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
     .table-data {
         font-family: 'Barlow Semi Condensed', sans-serif;
         width: 80%;
@@ -12,6 +17,8 @@
         border: 3px solid #ddd;
         font-size: 15px;
         text-align: center;
+        background-color: #fff;
+        color: #000;
     }
 </style>
 
@@ -22,7 +29,9 @@
     <title>Export Table</title>
 </head>
 <body>
-    <table class="table-data" border="1">
+    <div class="overflow-x-auto">
+        <table class="table">
+        <!-- head -->
         <thead>
             <tr>
                 {% for field in fields_table %}
@@ -39,7 +48,8 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
+        </table>
+    </div>
 </body>
 </html>
 

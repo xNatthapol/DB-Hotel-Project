@@ -1,209 +1,130 @@
 <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
-        padding-top: 110px;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        background-color: #fff;
     }
 
     .navbar {
-        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         height: 110px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin: 0px;
-        right: 0;
-        background-color: #002C1D;
-        border-bottom: #F5F5DC solid 5px;
+        background-color: #fff ;
     }
 
     .navbar-brand {
         font-family: Riesling;
-        font-size: 90px;
+        font-size: 80px;
         font-weight: 400;
-        color: #F5F5DC;
+        color: #bc8547;
         word-wrap: break-word;
         margin-left: 25px;
         text-decoration: none;
     }
 
     .nav-right {
-        font-family: 'Barlow Semi Condensed', sans-serif;
-        position: fixed;
+        color: #000000;
         display: flex;
-        right: 0;
-        top: 20px;
-        margin-right: 25px;
+        margin-right: 2rem;
         list-style: none;
+        gap: 1rem;
     }
 
-    .log-auths {
-        font-family: 'Barlow Semi Condensed', sans-serif;
-        background-color: #FFFDD1;
-        border-radius: 3px;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        border: none;
-        margin-left: 25px;
-        /* padding: 9px; */
-        font-size: 15px;
-        font-weight: 600;
-        color: #282828;
-        word-wrap: break-word;
-        padding-top: 9px;
-        height: 40px;
-    }
-
-    .nav-link {
-        color: #282828;
-        text-decoration: none;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .about-us {
-        font-family: 'Barlow Semi Condensed', sans-serif;
-        text-decoration: none;
-        background-color: #FFFDD1;
+    .log-auths, .about-us, .search-box, .search-select {
+        background-color: #fff ;
         border-radius: 25px;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
         border: none;
-        margin-left: 50px;
-        padding: 9px;
         font-size: 15px;
         font-weight: 600;
-        color: #282828;
+        color: #000000;
         word-wrap: break-word;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 5.5px;
-        width: 110px;
-        height: 15px;
-        line-height: 11px;
-    }
-
-    .search-box {
-        font-family: 'Barlow Semi Condensed', sans-serif;
-        text-decoration: none;
-        background-color: #FFFDD1;
-        border-radius: 25px;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        border: none;
         padding: 9px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #282828;
-        word-wrap: break-word;
-        padding-left: 20px;
-        padding-right: 20px;
         margin-top: 5.5px;
-        width: 300px;
-        height: 15px;
+        width: auto;
         line-height: 11px;
-    }
-
-    .search-div {
-        position: center;
-        text-align: center;
-        margin-right: 50px;
-        margin-top: 10px;
-        margin-bottom: 20px;
     }
 
     .search-select {
-        font-family: 'Barlow Semi Condensed', sans-serif;
         width: 200px;
-        background-color: #FFFDD1;
-        border-radius: 25px;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #282828;
-        word-wrap: break-word;
-        padding-left: 20px;
     }
 
-    .submit-btn {
-        font-family: 'Barlow Semi Condensed', sans-serif;
-        text-decoration: none;
-        background-color: #FFFDD1;
-        border-radius: 25px;
+    .search-div {
+        text-align: center;
+        background-color: #fff ;
+        margin: 0 auto;
+        width: 100%;
+        padding: 15px;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        border: none;
-        padding: 5px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #282828;
+    }
+
+    .nav-text, .nav-small {
+        color: #000000;
+        font-family: Riesling;
         word-wrap: break-word;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-top: 5.5px;
-        width: 90px;
-        height: 25px;
-        line-height: 11px;
     }
 
     .nav-text {
-        font-family: Riesling;
         font-size: 22px;
-        font-weight: 50;
-        color: #F5F5DC;
-        word-wrap: break-word;
         margin-left: 23px;
         text-decoration: none;
     }
+
     .nav-small {
-        font-family: Riesling;
         font-size: 16px;
-        font-weight: 35;
-        color: #F5F5DC;
-        word-wrap: break-word;
         margin-left: 15px;
         text-decoration: none;
     }
-
-
 </style>
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class ="navbar-brand" href="{% url 'hotel:index' %}">Hotel</a>
-
-    <ul class="nav-right">
+    <a class="navbar-brand" href="{% url 'hotel:index' %}">Hotel</a>
+    <form class="nav-right" action="{% url 'hotel:index' %}" method="post">
+        {% csrf_token %}
         <li>
-        <form action="{% url 'hotel:index' %}" method="post">
-            {% csrf_token %}
-            <td>
-               <label class="nav-text" for="search">Search:</label>
-                <select class="search-select" id="search" name="search">
-                    {% for option in options %}
-                        <option value="{{ option }}" {% if option == search %}selected{% endif %}>{{ option }}</option>
-                    {% endfor %}
-                </select>
-               <label class="nav-text" for="order_by">Sort_Column:</label>
-                <select class="search-select" id="order_by" name="order_by">
-                    {% for field in fields %}
-                        <option value="{{ field }}" {% if field == order_by %}selected{% endif %}>{{ field }}</option>
-                    {% endfor %}
-                </select>
-               <label class="nav-text" for="selected">Order:</label>
-                <select class="search-select" id="selected" name="selected">
-                    <option value="LOW->HIGH" {% if 'LOW->HIGH' == selected %}selected{% endif %}>LOW->HIGH</option>
-                    <option value="HIGH->LOW" {% if 'HIGH->LOW' == selected %}selected{% endif %}>HIGH->LOW</option>
-                </select>
-            </td>
-        <br>
-            <label class="nav-text">show column</label>
-            {% for field in fields %}
-                <label class="nav-small">{{ field }}:
-                <input type="checkbox" name="fields" value="{{ field }}" {% if field in selected_fields %}checked{% endif %}>
-                </label>
-            {% endfor %}
-            <td><input class="submit-btn" type="submit" value="Search"></td>
-        </form>
+            <select class="select select-ghost w-full max-w-xs" id="search" name="search">
+                <option disabled selected>SEARCH</option>
+                {% for option in options %}
+                    <option class="about-us" value="{{ option }}" {% if option == search %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
         </li>
-
-    </ul>
+        <li>
+            <select class="select select-ghost w-full max-w-xs" id="order_by" name="order_by">
+                <option disabled selected>SORT BY</option>
+                {% for field in fields %}
+                    <option value="{{ field }}" {% if field == order_by %}selected{% endif %}>{{ field }}</option>
+                {% endfor %}
+            </select>
+        </li>
+        <li>
+            <select class="select select-ghost w-full max-w-xs" id="selected" name="selected">
+                <option disabled selected>ORDER</option>
+                <option value="LOW->HIGH" {% if 'LOW->HIGH' == selected %}selected{% endif %}>LOW->HIGH</option>
+                <option value="HIGH->LOW" {% if 'HIGH->LOW' == selected %}selected{% endif %}>HIGH->LOW</option>
+            </select>
+        </li>
+        <td><input class="btn btn-outline" type="submit" value="Search"></td>
+    </form>
 </nav>
+
 <div class="search-div">
+    <label class="nav-text">SHOW COLUMN</label>
+    {% for field in fields %}
+        <label class="nav-small">{{ field }}:
+            <input class="checkbox" type="checkbox" name="fields" value="{{ field }}" {% if field in selected_fields %}checked{% endif %}>
+        </label>
+    {% endfor %}
     <form method="get" action="{% url 'hotel:index' %}">
-        <input class="search-box" type="text" id="search" name="search" placeholder="Search" value="{{ search_cocktail }}">
+        <input class="input input-bordered w-full max-w-xs" type="text" id="search" name="search" placeholder="Search" value="{{ search_cocktail }}">
     </form>
 </div>
