@@ -33,17 +33,24 @@ def export_table(request, model_name, fields=None, order_by=None):
     model = apps.get_model(app_label="hotel", model_name=model_name)
     models = apps.get_models()
     model_names = [mo.__name__ for mo in models][:-6]
+
+    all_fil = [field.name for field in model._meta.get_fields() if
+              not field.is_relation]
     if fields is None:
-        fields = [field.name for field in model._meta.get_fields() if not field.is_relation]
-    if order_by == "None":
-        data = model.objects.values(*fields)
+        fields = all_fil
     else:
-        data = model.objects.order_by(order_by).values(*fields)
+        if len(fields) == 1:
+            fields = fields[0]
+        else:
+            fields = fields.split(',')
+
+    data = model.objects.order_by(order).values(*fields)
 
     content = {
         'options': model_names,
         'data': data,
-        'fields': fields,
+        'fields': all_fil,
+        'fields_table': fields,
         'search': search,
         'order_by': order,
         'selected': selected,
@@ -90,12 +97,20 @@ class IndexView(View):
         selected_model = request.POST.get('search')
         order_by = request.POST.get('order_by')
         selected = request.POST.get('selected')
+        list_selected = request.POST.getlist('fields')
+
         request.session['search'] = selected_model
         request.session['order_by'] = order_by
         request.session['selected'] = selected
 
         if selected == 'HIGH->LOW' and order_by != 'None':
             order_by = '-' + order_by
+        if list_selected:
+            string = list_selected[0]
+            for field in list_selected[1::]:
+                string += ',' + field
+                print(string)
+            return redirect('hotel:export_table', model_name=selected_model, order_by=order_by, fields=string)
 
 
         return redirect('hotel:export_table', model_name=selected_model, order_by=order_by)
