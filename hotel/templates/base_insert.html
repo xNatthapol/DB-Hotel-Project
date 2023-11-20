@@ -1,0 +1,38 @@
+<!-- your_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Form</title>
+</head>
+<body>
+
+    <h2>Insert Data</h2>
+
+    <form method="post" action="{% url 'hotel:dynamic_form_view' %}">
+        {% csrf_token %}
+
+        <!-- User selection -->
+        <label for="selection">Select Form:</label>
+        <select id="selection" name="selection">
+            {% for form_type, form_class in form_classes.items %}
+                <option value="{{ form_type }}">{{ form_type }} Form</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Generate Form">
+    </form>
+
+    <!-- Display the dynamic form -->
+    <form method="post" action="{% url 'hotel:dynamic_form_view' %}">
+        {% csrf_token %}
+        {% for field in dynamic_form %}
+            <div>
+                {{ field.label_tag }}: {{ field }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit Form">
+    </form>
+
+</body>
+</html>

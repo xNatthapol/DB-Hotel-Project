@@ -2,6 +2,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.views import View
+from django import forms
+from django.shortcuts import render
+from .forms import DynamicForm, CustomerForm, PaymentForm, FacilityForm, RoomForm, ReservedRoomForm, ReservedFacilityForm, StockForm, IngredientForm, MealListForm, RecipeForm, EmployeeForm, RoleForm
+
 
 APP_NAME = 'hotel'
 filter_explanations = {
@@ -96,7 +100,6 @@ class IndexView(View):
             'fields': ['id'],
         }
 
-
         return render(request, self.template_name, content)
 
     def post(self, request):
@@ -121,3 +124,128 @@ class IndexView(View):
 
         return redirect('hotel:export_table', model_name=selected_model, order_by=order_by)
 
+def dynamic_form_view(request):
+
+    form_classes = {
+        'Customer': CustomerForm,
+        'Payment': PaymentForm,
+        'Facility': FacilityForm,
+        'Room': RoomForm,
+        'ReservedRoom': ReservedRoomForm,
+        'ReservedFacility': ReservedFacilityForm,
+        'Stock': StockForm,
+        'Ingredient': IngredientForm,
+        'MealList': MealListForm,
+        'Recipe': RecipeForm,
+        'Employee': EmployeeForm,
+        'Role': RoleForm,
+    }
+    fields = {
+        'Customer': {
+            'first_name': 'char',
+            'last_name': 'char',
+            'phone_number': 'char',
+            'email': 'char',
+            'checkin_time': 'datetime',
+            'checkout_time': 'datetime',
+        },
+
+        'Payment': {
+            'amount': 'decimal',
+            'money_type': 'char',
+            'transaction_type': 'char',
+            'description': 'text',
+        },
+
+        'Facility': {
+            'name': 'char',
+            'cost_per_hour': 'integer',
+        },
+
+        'Room': {
+            'floor': 'integer',
+            'room_type': 'char',
+            'accommodates': 'integer',
+            'is_available': 'boolean',
+        },
+
+        'ReservedRoom': {
+            'customer': 'foreignkey',
+            'room': 'foreignkey',
+            'room_number': 'integer',
+            'checkin_time': 'datetime',
+            'checkout_time': 'datetime',
+        },
+
+        'ReservedFacility': {
+            'customer': 'foreignkey',
+            'facility': 'foreignkey',
+            'checkin_time': 'datetime',
+            'checkout_time': 'datetime',
+        },
+
+        'Stock': {
+            'ingredient_name': 'char',
+            'quantity': 'integer',
+            'type': 'char',
+        },
+
+        'Ingredient': {
+            'recipe': 'foreignkey',
+            'stock': 'foreignkey',
+            'ingredients_measure': 'char',
+            'measure_type': 'char',
+        },
+
+        'MealList': {
+            'recipe': 'foreignkey',
+            'quantity': 'integer',
+            'date': 'date',
+        },
+
+        'Recipe': {
+            'menu_name': 'char',
+            'portion_size': 'integer',
+            'price': 'decimal',
+        },
+
+        'Employee': {
+            'role': 'foreignkey',
+            'first_name': 'char',
+            'last_name': 'char',
+            'phone_number': 'char',
+            'email': 'char',
+        },
+
+        'Role': {
+            'role_name': 'char',
+            'salary': 'decimal',
+        },
+
+
+
+    }
+
+    if request.method == 'POST':
+        # Assuming the user selection is submitted via a form
+        selection = request.POST.get('selection', '')
+        # Get the corresponding form class based on user selection
+        form_class = form_classes.get(selection, None)
+        if form_class:
+            # Generate the dynamic form
+            dynamic_form = form_class(request.POST)
+
+            if dynamic_form.is_valid():
+
+                dynamic_form.save()
+
+        else:
+            # Create an instance of DynamicForm with the fields dictionary
+            dynamic_form = DynamicForm(fields)
+        return render(request, 'base_insert.html', { 'form_classes': form_classes, 'dynamic_form': dynamic_form})
+
+    else:
+        # Default to an empty form on initial page load
+        # dynamic_form = DynamicForm(fields)
+        pass
+    return render(request, 'base_insert.html', { 'form_classes': form_classes})
